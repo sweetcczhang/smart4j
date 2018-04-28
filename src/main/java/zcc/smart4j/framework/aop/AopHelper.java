@@ -1,14 +1,12 @@
-package zcc.smart4j.framework.helper;
+package zcc.smart4j.framework.aop;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import zcc.smart4j.framework.annotation.Aspect;
-import zcc.smart4j.framework.annotation.Service;
-import zcc.smart4j.framework.proxy.AspectProxy;
-import zcc.smart4j.framework.proxy.Proxy;
-import zcc.smart4j.framework.proxy.ProxyManager;
+import zcc.smart4j.framework.aop.annotation.Aspect;
+import zcc.smart4j.framework.aop.annotation.Service;
+import zcc.smart4j.framework.helper.BeanHelper;
+import zcc.smart4j.framework.helper.ClassHelper;
 import zcc.smart4j.framework.proxy.TransactionProxy;
-import zcc.smart4j.framework.util.ClassUtil;
 
 import java.lang.annotation.Annotation;
 import java.util.*;
@@ -25,7 +23,7 @@ public final class AopHelper {
      */
     static {
         try {
-            Map<Class<?>,Set<Class<?>>> proxyMap = createProxyMap();
+            Map<Class<?>,List<Class<?>>> proxyMap = createProxyMap();
             Map<Class<?>,List<Proxy>> targetMap = createTargetMap(proxyMap);
             for(Map.Entry<Class<?>,List<Proxy>> targetEntry : targetMap.entrySet()){
                 Class<?> targetClass = targetEntry.getKey();
@@ -43,8 +41,8 @@ public final class AopHelper {
      * @return
      * @throws Exception
      */
-    private static Set<Class<?>> createTargetClassSet(Aspect aspect)throws Exception{
-        Set<Class<?>> targetClassSet = new HashSet<Class<?>>();
+    private static List<Class<?>> createTargetClassSet(Aspect aspect)throws Exception{
+        List<Class<?>> targetClassSet = new ArrayList<Class<?>>();
         Class<? extends Annotation> annotation = aspect.value();
         if(annotation !=null && !annotation.equals(Aspect.class)){
             targetClassSet.addAll(ClassHelper.getClassSetByAnnotation(annotation));
@@ -57,8 +55,8 @@ public final class AopHelper {
      * @return
      * @throws Exception
      */
-    private static Map<Class<?>,Set<Class<?>>> createProxyMap() throws Exception {
-        Map<Class<?>,Set<Class<?>>> proxyMap = new HashMap<Class<?>, Set<Class<?>>>();
+    private static Map<Class<?>,List<Class<?>>> createProxyMap() throws Exception {
+        Map<Class<?>,List<Class<?>>> proxyMap = new HashMap<Class<?>, List<Class<?>>>();
         addAspectProxy(proxyMap);
         addTransactionProxy(proxyMap);
         return proxyMap;
@@ -69,11 +67,11 @@ public final class AopHelper {
      * @param proxyMap
      * @return
      */
-    private static Map<Class<?>,List<Proxy>>createTargetMap(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception{
+    private static Map<Class<?>,List<Proxy>>createTargetMap(Map<Class<?>, List<Class<?>>> proxyMap) throws Exception{
         Map<Class<?>,List<Proxy>>  targetMap = new HashMap<Class<?>, List<Proxy>>();
-        for (Map.Entry<Class<?>,Set<Class<?>>> proxyEnty: proxyMap.entrySet()){
+        for (Map.Entry<Class<?>,List<Class<?>>> proxyEnty: proxyMap.entrySet()){
             Class<?> proxyClass = proxyEnty.getKey();
-            Set<Class<?>> targetClassSet = proxyEnty.getValue();
+            List<Class<?>> targetClassSet = proxyEnty.getValue();
             for (Class<?> targetClass : targetClassSet){
                 Proxy proxy = (Proxy) proxyClass.newInstance();
                 if(targetMap.containsKey(targetClass)){
@@ -87,18 +85,19 @@ public final class AopHelper {
         }
         return targetMap;
     }
-    private static void addAspectProxy(Map<Class<?>,Set<Class<?>>> proxyMap) throws Exception{
-        Set<Class<?>> proxyClassSet = ClassHelper.getClassSetBySupper(AspectProxy.class);
+    private static void addAspectProxy(Map<Class<?>,List<Class<?>>> proxyMap) throws Exception{
+        //获取切面类(所有继承于BaseAspect的类)
+        List<Class<?>> proxyClassSet = ClassHelper.getClassSetBySupper(AspectProxy.class);
         for (Class<?> cls : proxyClassSet){
             if (cls.isAnnotationPresent(Aspect.class)){
                 Aspect aspect = cls.getAnnotation(Aspect.class);
-                Set<Class<?>> targetClass = createTargetClassSet(aspect);
+                List<Class<?>> targetClass = createTargetClassSet(aspect);
                 proxyMap.put(cls,targetClass);
             }
         }
     }
-    private static void addTransactionProxy(Map<Class<?>,Set<Class<?>>> proxyMap){
-        Set<Class<?>> serviceClassSet = ClassHelper.getClassSetByAnnotation(Service.class);
+    private static void addTransactionProxy(Map<Class<?>,List<Class<?>>> proxyMap){
+        List<Class<?>> serviceClassSet = ClassHelper.getClassSetByAnnotation(Service.class);
         proxyMap.put(TransactionProxy.class,serviceClassSet);
     }
 }

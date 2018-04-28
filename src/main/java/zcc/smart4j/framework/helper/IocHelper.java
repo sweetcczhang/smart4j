@@ -1,6 +1,6 @@
 package zcc.smart4j.framework.helper;
 
-import zcc.smart4j.framework.annotation.Inject;
+import zcc.smart4j.framework.aop.annotation.Inject;
 import zcc.smart4j.framework.util.CollectionUtil;
 import zcc.smart4j.framework.util.ReflactionUtil;
 

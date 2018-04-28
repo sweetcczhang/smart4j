@@ -1,6 +1,7 @@
-package zcc.smart4j.framework.proxy;
+package zcc.smart4j.framework.aop;
 
 import net.sf.cglib.proxy.MethodProxy;
+import zcc.smart4j.framework.aop.Proxy;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

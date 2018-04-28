@@ -1,7 +1,6 @@
-package zcc.smart4j.framework.annotation;
+package zcc.smart4j.framework.aop.annotation;
 
 import java.lang.annotation.*;
-import java.lang.reflect.AnnotatedElement;
 
 /**
  * Created by 张城城 on 2018/3/30.

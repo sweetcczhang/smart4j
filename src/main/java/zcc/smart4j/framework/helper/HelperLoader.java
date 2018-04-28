@@ -1,5 +1,6 @@
 package zcc.smart4j.framework.helper;
 
+import zcc.smart4j.framework.aop.AopHelper;
 import zcc.smart4j.framework.util.ClassUtil;
 
 /**

@@ -2,8 +2,10 @@ package zcc.smart4j.framework.proxy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import zcc.smart4j.framework.annotation.Transaction;
-import zcc.smart4j.framework.helper.DatabaseHelper;
+import zcc.smart4j.framework.aop.annotation.Transaction;
+import zcc.smart4j.framework.aop.Proxy;
+import zcc.smart4j.framework.aop.ProxyChain;
+import zcc.smart4j.framework.dao.DatabaseHelper;
 
 import java.lang.reflect.Method;
 

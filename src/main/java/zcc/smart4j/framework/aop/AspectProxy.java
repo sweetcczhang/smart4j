@@ -1,4 +1,4 @@
-package zcc.smart4j.framework.proxy;
+package zcc.smart4j.framework.aop;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

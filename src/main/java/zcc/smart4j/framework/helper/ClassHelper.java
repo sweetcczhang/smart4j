@@ -1,14 +1,12 @@
 package zcc.smart4j.framework.helper;
 
-import zcc.smart4j.framework.annotation.Controller;
-import zcc.smart4j.framework.annotation.Service;
+import zcc.smart4j.framework.aop.annotation.Controller;
+import zcc.smart4j.framework.aop.annotation.Service;
 import zcc.smart4j.framework.util.ClassUtil;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by 张城城 on 2018/3/30.
@@ -67,8 +65,8 @@ public final class ClassHelper {
      * @param annotationClass
      * @return
      */
-    public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotationClass){
-        Set<Class<?>> classSet = new HashSet<Class<?>>();
+    public static List<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotationClass){
+        List<Class<?>> classSet = new ArrayList<Class<?>>();
         for (Class<?> cls : CLASS_SET){
             if(cls.isAnnotationPresent(annotationClass)){
                 classSet.add(cls);

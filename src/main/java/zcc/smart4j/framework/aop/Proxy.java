@@ -1,4 +1,4 @@
-package zcc.smart4j.framework.proxy;
+package zcc.smart4j.framework.aop;
 
 /**
  * Created by 张城城 on 2018/3/30.
