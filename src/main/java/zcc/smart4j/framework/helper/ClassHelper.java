@@ -2,6 +2,7 @@ package zcc.smart4j.framework.helper;
 
 import zcc.smart4j.framework.aop.annotation.Controller;
 import zcc.smart4j.framework.aop.annotation.Service;
+import zcc.smart4j.framework.core.ConfigHelper;
 import zcc.smart4j.framework.util.ClassUtil;
 
 import java.lang.annotation.Annotation;

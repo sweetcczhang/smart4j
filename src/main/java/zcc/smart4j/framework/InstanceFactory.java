@@ -2,7 +2,7 @@ package zcc.smart4j.framework;
 
 import zcc.smart4j.framework.ds.DataSourceFactory;
 import zcc.smart4j.framework.ds.impl.DefaultDataSourceFactory;
-import zcc.smart4j.framework.helper.ConfigHelper;
+import zcc.smart4j.framework.core.ConfigHelper;
 import zcc.smart4j.framework.util.ObjectUtil;
 import zcc.smart4j.framework.util.StringUtil;
 

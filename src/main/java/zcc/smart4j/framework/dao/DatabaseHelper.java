@@ -27,11 +27,11 @@ public final class  DatabaseHelper {
 
 
     public static void beginTransaction(){
-        //Connection conn =
+        //TODO
     }
 
     public static void commitTransaction(){
-
+        //TODO
     }
 
 
