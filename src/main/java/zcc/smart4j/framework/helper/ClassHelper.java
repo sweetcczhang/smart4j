@@ -21,6 +21,7 @@ public final class ClassHelper {
     public static List<Class<?>> getClassList(){
         return CLASS_SET;
     }
+
     public static List<Class<?>> getServiceClassaList(){
         List<Class<?>> classSet = new ArrayList<Class<?>>();
         for (Class<?> cls :CLASS_SET){

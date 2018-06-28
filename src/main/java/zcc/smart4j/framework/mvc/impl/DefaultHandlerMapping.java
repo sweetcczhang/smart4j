@@ -1,8 +1,10 @@
 package zcc.smart4j.framework.mvc.impl;
 
-import zcc.smart4j.framework.mvc.Handler;
+
+import zcc.smart4j.framework.bean.Handler;
+import zcc.smart4j.framework.bean.Requester;
 import zcc.smart4j.framework.mvc.HandlerMapping;
-import zcc.smart4j.framework.mvc.Requester;
+
 
 import java.util.HashMap;
 import java.util.Map;

@@ -3,6 +3,7 @@ package zcc.smart4j.framework.helper;
 import zcc.smart4j.framework.util.ReflactionUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public final class BeanHelper {
     private static final Map<Class<?>,Object> BEAN_MAP = new HashMap<Class<?>, Object>();
 
     static {
-        Set<Class<?>> beanClassSet = ClassHelper.getBeanClassSet();
+        List<Class<?>> beanClassSet = ClassHelper.getClassList();
         for(Class<?> cls : beanClassSet){
             Object object =ReflactionUtil.newInstance(cls);
             BEAN_MAP.put(cls,object);
